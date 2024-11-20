@@ -3,56 +3,48 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { TextInput, Button, Text } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 
-const LoginForm = ({
-  user,
-  handleInputChange,
-  errors,
-  showPassword,
-  setShowPassword,
-  isLoading,
-  onSubmit
-}) => {
+const LoginForm = (props) => {
   return (
     <View>
       <TextInput
         label="Email"
-        value={user.email}
-        onChangeText={(text) => handleInputChange("email", text)}
+        value={props.user.email}
+        onChangeText={(text) => props.handleInputChange("email", text)}
         style={styles.input}
         keyboardType="email-address"
         autoCapitalize="none"
-        error={!!errors.email}
+        error={!!props.errors.email}
       />
-      {errors.email ? <Text style={styles.error}>{errors.email}</Text> : null}
+      {props.errors.email ? <Text style={styles.error}>{props.errors.email}</Text> : null}
 
       <View style={styles.inputContainer}>
         <TextInput
           label="Password"
-          value={user.password}
-          onChangeText={(text) => handleInputChange("password", text)}
+          value={props.user.password}
+          onChangeText={(text) => props.handleInputChange("password", text)}
           style={styles.input}
-          secureTextEntry={!showPassword}
-          error={!!errors.password}
+          secureTextEntry={!props.showPassword}
+          error={!!props.errors.password}
         />
         <TouchableOpacity
-          onPress={() => setShowPassword(!showPassword)}
+          onPress={() => props.setShowPassword(!props.showPassword)}
           style={styles.toggleIcon}
         >
           <Ionicons
-            name={showPassword ? "eye-off" : "eye"}
+            name={props.showPassword ? "eye-off" : "eye"}
             size={24}
             color="gray"
           />
         </TouchableOpacity>
       </View>
 
-      {errors.password ? <Text style={styles.error}>{errors.password}</Text> : null}
+      {props.errors.password ? <Text style={styles.error}>{props.errors.password}</Text> : null}
 
       <Button
         mode="contained"
-        onPress={onSubmit}
+        onPress={props.onSubmit}
         style={styles.button}
-        disabled={isLoading}
+        disabled={props.isLoading}
       >
         Login
       </Button>
