@@ -3,94 +3,82 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { TextInput, Button, Text } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 
-const SignUpForm = ({
-  user,
-  handleInputChange,
-  errors,
-  confirmPassword,
-  setConfirmPassword,
-  showPassword,
-  setShowPassword,
-  showConfirmPassword,
-  setShowConfirmPassword,
-  isLoading,
-  onSubmit
-}) => {
+const SignUpForm = (props) => {
   return (
     <View>
       <TextInput
         label="User Name"
-        value={user.name}
-        onChangeText={(text) => handleInputChange("name", text)}
+        value={props.user.name}
+        onChangeText={(text) => props.handleInputChange("name", text)}
         style={styles.input}
-        error={!!errors.userName}
+        error={!!props.errors.userName}
       />
-      {errors.userName ? <Text style={styles.error}>{errors.userName}</Text> : null}
+      {props.errors.userName ? <Text style={styles.error}>{props.errors.userName}</Text> : null}
 
       <TextInput
         label="Email"
-        value={user.email}
-        onChangeText={(text) => handleInputChange("email", text)}
+        value={props.user.email}
+        onChangeText={(text) => props.handleInputChange("email", text)}
         style={styles.input}
         keyboardType="email-address"
         autoCapitalize="none"
-        error={!!errors.email}
+        error={!!props.errors.email}
       />
-      {errors.email ? <Text style={styles.error}>{errors.email}</Text> : null}
+      {props.errors.email ? <Text style={styles.error}>{props.errors.email}</Text> : null}
 
       <View style={styles.inputContainer}>
         <TextInput
           label="Password"
-          value={user.password}
-          onChangeText={(text) => handleInputChange("password", text)}
+          value={props.user.password}
+          onChangeText={(text) => props.handleInputChange("password", text)}
           style={styles.input}
-          secureTextEntry={!showPassword}
-          error={!!errors.password}
+          secureTextEntry={!props.showPassword}
+          error={!!props.errors.password}
         />
         <TouchableOpacity
-          onPress={() => setShowPassword(!showPassword)}
+          onPress={() => props.setShowPassword(!props.showPassword)}
           style={styles.toggleIcon}
         >
           <Ionicons
-            name={showPassword ? "eye-off" : "eye"}
+            name={props.showPassword ? "eye-off" : "eye"}
             size={24}
             color="gray"
           />
         </TouchableOpacity>
       </View>
 
-      {errors.password ? <Text style={styles.error}>{errors.password}</Text> : null}
+      {props.errors.password ? <Text style={styles.error}>{props.errors.password}</Text> : null}
 
       <View style={styles.inputContainer}>
         <TextInput
           label="Confirm Password"
-          value={confirmPassword}
-          onChangeText={(text) => setConfirmPassword(text)}
+          value={props.confirmPassword}
+          onChangeText={(text) => props.setConfirmPassword(text)}
           style={styles.input}
-          secureTextEntry={!showConfirmPassword}
-          error={!!errors.confirmPassword}
+          secureTextEntry={!props.showConfirmPassword}
+          error={!!props.errors.confirmPassword}
         />
         <TouchableOpacity
-          onPress={() => setShowConfirmPassword(!showConfirmPassword)}
+          onPress={() => props.setShowConfirmPassword(!props.showConfirmPassword)}
           style={styles.toggleIcon}
         >
           <Ionicons
-            name={showConfirmPassword ? "eye-off" : "eye"}
+            name={props.showConfirmPassword ? "eye-off" : "eye"}
             size={24}
             color="gray"
           />
         </TouchableOpacity>
       </View>
 
-      {errors.confirmPassword ? (
-        <Text style={styles.error}>{errors.confirmPassword}</Text>
+      {props.errors.confirmPassword ? (
+        <Text style={styles.error}>{props.errors.confirmPassword}</Text>
       ) : null}
 
       <Button
         mode="contained"
-        onPress={onSubmit}
+        onPress={props.onSubmit}
         style={styles.button}
-        disabled={isLoading}
+        disabled={props.isLoading}
       >
         Sign Up
       </Button>
