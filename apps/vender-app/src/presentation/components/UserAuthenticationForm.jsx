@@ -4,84 +4,91 @@ import { Card, Text, Divider } from "react-native-paper";
 import { Button, Icon } from "@rneui/themed";
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
-import UserModel from "../../domain/models/UserModel"
+import UserModel from "../../domain/models/UserModel";
 import { useNavigation, CommonActions } from "@react-navigation/native";
-import { validateEmail, validatePassword, validateUsername } from "./Validators";
+import {
+  validateEmail,
+  validatePassword,
+  validateUsername,
+} from "./Validators";
 
-const UserAuthenticationForm = () => {
-    const [isSignUp, setIsSignUp] = useState(false);
-    const [user, setUser] = useState(new UserModel("", "", "", "", "", ""));
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const [errors, setErrors] = useState({
+const UserAuthenticationForm = (props) => {
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [user, setUser] = useState(new UserModel("", "", "", "", "", ""));
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+    userName: "",
+    confirmPassword: "",
+  });
+  const navigation = useNavigation();
+
+  const handleAuthToggle = () => {
+    setErrors({
       email: "",
       password: "",
       userName: "",
       confirmPassword: "",
     });
-    const navigation = useNavigation();
-  
-    const handleAuthToggle = () => {
-      setErrors({
-        email: "",
-        password: "",
-        userName: "",
-        confirmPassword: "",
-      });
-      setIsSignUp(!isSignUp);
-    };
-  
-    const validateFields = () => {
-      let valid = true;
-      let newErrors = {};
-  
-      if (!validateEmail(user.email)) {
-        newErrors.email = "Please enter a valid email address.";
-        valid = false;
-      }
-  
-      if (isSignUp && !validateUsername(user.name)) {
-        newErrors.userName = "Please enter a valid username.";
-        valid = false;
-      }
-  
-      if (!user.password) {
-        newErrors.password = "Password cannot be empty";
-        valid = false;
-      } else if (!validatePassword(user.password)) {
-        newErrors.password = "Password must be at least 8 characters.";
-        valid = false;
-      }
-  
-      if (isSignUp && confirmPassword !== user.password) {
-        newErrors.confirmPassword = "Passwords do not match.";
-        valid = false;
-      }
-  
-      setErrors(newErrors);
-      return valid;
-    };
-  
-    const handleInputChange = (field, value) => {
-      setUser((prevUser) => ({ ...prevUser, [field]: value }));
-      if (errors[field]) setErrors((prevErrors) => ({ ...prevErrors, [field]: "" }));
-    };
-  
-    const handleSignUp = () => {
-      if (validateFields()) {
-        console.log("Sign Up submitted!");
-        // handle sign up logic here
-      }
-    };
-  
-    const handleLogin = () => {
-      if (validateFields()) {
-        console.log("Login submitted!");
-        // handle login logic here
-      }
-    };
+    setUser(new UserModel("", "", "", "", "", ""));
+    setIsSignUp(!isSignUp);
+  };
+
+  const validateFields = () => {
+    let valid = true;
+    let newErrors = {};
+
+    if (!validateEmail(user.email)) {
+      newErrors.email = "Please enter a valid email address.";
+      valid = false;
+    }
+
+    if (isSignUp && !validateUsername(user.name)) {
+      newErrors.userName = "Please enter a valid username.";
+      valid = false;
+    }
+
+    if (!user.password) {
+      newErrors.password = "Password cannot be empty";
+      valid = false;
+    } else if (!validatePassword(user.password)) {
+      newErrors.password = "Password must be at least 8 characters.";
+      valid = false;
+    }
+
+    if (isSignUp && confirmPassword !== user.password) {
+      newErrors.confirmPassword = "Passwords do not match.";
+      valid = false;
+    }
+
+    setErrors(newErrors);
+    return valid;
+  };
+
+  const handleInputChange = (field, value) => {
+    setUser((prevUser) => ({ ...prevUser, [field]: value }));
+    if (errors[field])
+      setErrors((prevErrors) => ({ ...prevErrors, [field]: "" }));
+  };
+
+  const handleSignUp = () => {
+    if (validateFields()) {
+      props.handleSignUp();
+    }
+  };
+
+  const handleLogin = () => {
+    // Removing Validations for Development
+    // if (validateFields()) {
+    //   console.log("Login submitted!");
+    //   props.handleSignUp();
+    // }
+    props.handleLogin();
+  };
 
   return (
     <View style={styles.container}>
@@ -123,7 +130,7 @@ const UserAuthenticationForm = () => {
               source={require("../../../assets/google.png")}
               style={styles.socialIcon}
             />
-            <Text style={styles.socialButtonText}>{isSignUp ? "Create Account" : "Login with Google"}</Text>
+            <Text style={styles.socialButtonText}>{"Login with Google"}</Text>
           </Button>
 
           <View style={styles.toggleContainer}>
@@ -183,7 +190,7 @@ const styles = StyleSheet.create({
   },
   divider: {
     flex: 1,
-    marginVertical:20
+    marginVertical: 20,
   },
   dividerText: {
     paddingHorizontal: 10,

@@ -10,6 +10,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import UserAutentication from "../screens/Authentication/UserAutentication";
 import LinkingConfiguration from "./LinkingConfiguration";
+import HomeScreen from "../screens/Home/HomeScreen";
 
 export default function Navigation({ colorScheme }) {
   //   const [isLoggedIn, setIsLoggedIn] = useState(null);
@@ -59,6 +60,11 @@ function RootNavigator() {
       <Stack.Screen
         name="UserAuthentication"
         component={UserAutentication}
+        options={{ headerShown: false }}
+      />
+       <Stack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
