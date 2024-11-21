@@ -11,6 +11,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import UserAutentication from "../screens/Authentication/UserAutentication";
 import LinkingConfiguration from "./LinkingConfiguration";
 import HomeScreen from "../screens/Home/HomeScreen";
+import ChatScreen from "../screens/ChatScreen/ChatScreen";
 
 export default function Navigation({ colorScheme }) {
   //   const [isLoggedIn, setIsLoggedIn] = useState(null);
@@ -62,9 +63,14 @@ function RootNavigator() {
         component={UserAutentication}
         options={{ headerShown: false }}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ChatScreen"
+        component={ChatScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
