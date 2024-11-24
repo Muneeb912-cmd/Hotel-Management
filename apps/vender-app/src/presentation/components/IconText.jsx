@@ -9,7 +9,7 @@ const IconText = (props) => {
   return (
     <View style={style.container}>
       <FontAwesome6 name={props.icon} size={20} color={isDarkTheme===true?"white":"black"}/>
-      <Text style={{ alignSelf: "center", marginStart: 5 }}>{props.text}</Text>
+      <Text style={{ alignSelf: "center", marginStart: 5 ,fontSize:15}}>{props.text}</Text>
     </View>
   );
 };

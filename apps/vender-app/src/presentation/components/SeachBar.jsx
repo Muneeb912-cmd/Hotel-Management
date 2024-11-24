@@ -4,7 +4,7 @@ import { Button, TextInput } from "react-native-paper";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 const SearchBar = ({
-  placeholder = "Search your hotel...",
+  placeholder,
   onSearch,
   onClear,
 }) => {
@@ -29,7 +29,7 @@ const SearchBar = ({
       <View style={styles.inputContainer}>
         <TextInput
           mode="outlined"
-          placeholder="Search..."
+          placeholder={placeholder}
           value={searchText}
           onChangeText={handleChangeText}
           style={styles.input}

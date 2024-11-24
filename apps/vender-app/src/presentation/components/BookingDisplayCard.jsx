@@ -25,15 +25,77 @@ const BookingDisplayCard = ({ item }) => {
               alignItems: "center",
             }}
           >
-            <Text variant="titleLarge" style={{fontWeight:"bold"}}>Room Booking Request</Text>
+            <Text variant="titleLarge" style={{ fontWeight: "bold" }}>
+              Room Booking Request
+            </Text>
             <BookingDisplayCardMenu />
           </View>
+          <Text style={{ marginVertical: 5 }}>Booking ID: {item.id}</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          >
+            <View style={{ width: "48%" }}>
+              <Text>Hotel: {item.hotel_name}</Text>
+              <Text>Room ID: {item.hotel_room_id}</Text>
+            </View>
+            <View style={{ width: "48%" }}>
+              <Text>Room Category: {item.hotel_room_category}</Text>
+              <Text>Room Rent: Rs. {item.hotel_room_rent} / Night</Text>
+            </View>
+          </View>
 
-          <View>
-            <Text>Hotel: {item.hotel_name}</Text>
-            <Text>Room ID: {item.hotel_room_id}</Text>
-            <Text>Room Category: {item.hotel_room_category}</Text>
-            <Text>Room Rent: Rs. {item.hotel_room_rent} / Night</Text>
+          <Divider style={{ height: 2, marginTop: 5 }} />
+          <View
+            style={[
+              styles.row,
+              { flexDirection: width < 300 ? "column" : "row" },
+              { marginVertical: 10, marginHorizontal: 2 },
+            ]}
+          >
+            <View
+              style={{
+                flex: 1,
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontSize: 18,
+                  fontWeight: "bold",
+                }}
+              >
+                Check-In
+              </Text>
+              <Text style={{ textAlign: "center", fontSize: 18 }}>
+                {item.user_check_in_date}
+              </Text>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontSize: 18,
+                  fontWeight: "bold",
+                }}
+              >
+                Check-Out
+              </Text>
+              <Text style={{ textAlign: "center", fontSize: 18 }}>
+                {item.user_check_out_date}
+              </Text>
+            </View>
           </View>
 
           <Divider style={{ height: 2, marginTop: 5 }} />
@@ -64,7 +126,7 @@ const BookingDisplayCard = ({ item }) => {
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  alignItems:'center'
+                  alignItems: "center",
                 }}
               >
                 <Text style={styles.nameText}>{item.user_name}</Text>

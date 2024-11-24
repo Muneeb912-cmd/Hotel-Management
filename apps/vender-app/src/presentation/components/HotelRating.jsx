@@ -1,22 +1,12 @@
-import React, { useState } from "react";
-import { View, StyleSheet,useColorScheme } from "react-native";
+import React from "react";
+import { View, StyleSheet } from "react-native";
 import { Text } from "react-native-paper";
-import { Rating } from "react-native-ratings";
+import { Rating } from '@kolking/react-native-rating';
 
-const HotelRating = ({ ratingValue }) => {
-  const theme = useColorScheme();
-  const isDarkTheme = theme === "dark";
+const HotelRating = ({ ratingValue,isdisabled }) => {
   return (
     <View style={styles.container}>
-      <Rating
-        type="custom"
-        ratingCount={5}
-        tintColor={isDarkTheme===true?"#242329":"#F8F3F9"}
-        imageSize={24}
-        style={styles.rating}
-        readonly={true}
-        startingValue={ratingValue} // Display the initial rating value
-      />
+      <Rating size={20} rating={ratingValue} disabled={isdisabled} />
       <Text style={styles.ratingText}>{ratingValue}/5</Text>
     </View>
   );
@@ -24,17 +14,18 @@ const HotelRating = ({ ratingValue }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row", // Align items in a row
-    alignItems: "center", // Vertically center align
+    flexDirection: "row", 
+    alignItems: "center", 
     marginTop: 5,
     marginBottom: 20,
   },
   rating: {
-    marginRight: 5, // Space between stars and text
+    marginRight: 5, 
   },
   ratingText: {
     fontSize: 20,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    marginHorizontal:10
   },
 });
 

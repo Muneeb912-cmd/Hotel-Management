@@ -26,7 +26,7 @@ const HotelDisplayCard = ({ item }) => {
             <View style={{ flex: 1, paddingRight: 10 }}>
               <Text variant="titleLarge">{item.hotel_name}</Text>
               <Text variant="bodyMedium">{item.punch_line}</Text>
-              <HotelRating ratingValue={item.rating} />
+              <HotelRating ratingValue={item.rating} isdisabled={true}/>
             </View>
             <HotelDisplayCardMenu item={item} />
           </View>

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { View,useColorScheme } from "react-native";
+import { View, useColorScheme } from "react-native";
 import { IconButton, Menu, Divider } from "react-native-paper";
 import Feather from "@expo/vector-icons/Feather";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const HotelDisplayCardMenu = (props) => {
   const [visible, setVisible] = useState(false);
@@ -15,18 +16,43 @@ const HotelDisplayCardMenu = (props) => {
         visible={visible}
         onDismiss={closeMenu}
         anchorPosition="bottom"
-        style={{width:"30%"}}
+        style={{ width: "30%" }}
         anchor={
           <IconButton
-            icon={() => <Feather name="more-vertical" size={18} color={isDarkTheme===true?"white":"black"}/>}
+            icon={() => (
+              <Feather
+                name="more-vertical"
+                size={18}
+                color={isDarkTheme === true ? "white" : "black"}
+              />
+            )}
             onPress={() => openMenu()}
             mode="contained-tonal"
             size={10}
           />
         }
       >
+        
         <Menu.Item
-          leadingIcon={() => <Feather name="edit-3" size={18} color={isDarkTheme===true?"white":"black"}/>}
+          leadingIcon={() => (
+            <Ionicons
+              name="stats-chart"
+              size={24}
+              color={isDarkTheme === true ? "white" : "black"}
+            />
+          )}
+          onPress={() => {}}
+          title="Stats"
+        />
+        <Divider />
+        <Menu.Item
+          leadingIcon={() => (
+            <Feather
+              name="edit-3"
+              size={18}
+              color={isDarkTheme === true ? "white" : "black"}
+            />
+          )}
           onPress={() => {}}
           title="Edit"
         />
