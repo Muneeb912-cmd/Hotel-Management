@@ -12,6 +12,10 @@ import UserAutentication from "../screens/Authentication/UserAutentication";
 import LinkingConfiguration from "./LinkingConfiguration";
 import HomeScreen from "../screens/Home/HomeScreen";
 import ChatScreen from "../screens/ChatScreen/ChatScreen";
+import AddHotel from "../screens/AddNewHotel/AddNewHotel";
+import LocationPickerScreen from "../screens/AddNewHotel/SubScreens/LocationPickerScreen";
+
+
 
 export default function Navigation({ colorScheme }) {
   //   const [isLoggedIn, setIsLoggedIn] = useState(null);
@@ -71,6 +75,16 @@ function RootNavigator() {
       <Stack.Screen
         name="ChatScreen"
         component={ChatScreen}
+        options={{ headerShown: false }}
+      />
+       <Stack.Screen
+        name="AddHotel"
+        component={AddHotel}
+        options={{ headerShown: false }}
+      />
+        <Stack.Screen
+        name="LocationPickerScreen"
+        component={LocationPickerScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
